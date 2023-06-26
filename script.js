@@ -30,9 +30,20 @@ function showMovies(data) {
   grid.innerHTML='';
     data.forEach(movie => {
       const { title, poster_path } = movie; // destructuring the object
-      const movieL = document.createElement('div'); //creating new div
-      movieL.classList.add('card'); // adding class named card
-      movieL.style.background = `linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 80.79%), url(${IMG_URL + poster_path})`;// Set the background with linear gradient and image URL
+      const movieL = document.createElement('div'); // Creating new div
+      movieL.classList.add('card'); // Adding class named card
+      
+      // Adjusting the background image dimensions
+      const aspectRatio = 500 / 750;
+      const width = 300;
+      const height = width / aspectRatio;
+      
+      movieL.style.background = `
+        linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 80.79%),
+        url(${IMG_URL + poster_path})
+      `;
+      movieL.style.backgroundSize = `${width}px ${height}px`;
+      
       movieL.innerHTML = `
         <h2 id="title">${title}</h2>
       `;
